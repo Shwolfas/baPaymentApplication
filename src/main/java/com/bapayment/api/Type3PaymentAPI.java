@@ -1,11 +1,9 @@
-package com.bapayment.entities;
+package com.bapayment.api;
 
-import jakarta.persistence.*;
+import com.bapayment.enums.CurrencyEnum;
+import com.bapayment.enums.PaymentTypesEnum;
 
-@Entity
-@Table(name = "db_payment_type3")
-@PrimaryKeyJoinColumn(name = "payment_id")
-public class Type3PaymentEntity extends BasePaymentEntity {
+public class Type3PaymentAPI extends BasePaymentAPI{
     private String creditor_bic;
 
     public String getCreditor_bic() {

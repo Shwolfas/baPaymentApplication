@@ -1,25 +1,28 @@
 package com.bapayment.validations.implementation;
 
-import com.bapayment.validations.PaymentValidation;
+import com.bapayment.api.BasePaymentAPI;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
 
 @Component
-public class BasePaymentValidationImpl implements PaymentValidation {
-    @Override
-    public void validate(Map<String, Object> payload) {
-        if (!payload.containsKey("amount") || !(payload.get("amount") instanceof Number) || ((Number) payload.get("amount")).longValue() < 0) {
-            throw new IllegalArgumentException("amount is missing or it is not a positive number");
+public class BasePaymentValidationImpl {
+
+    protected void validateBase(BasePaymentAPI basePaymentAPI) {
+        if (basePaymentAPI.getAmount() < 0) {
+            throw new IllegalArgumentException("amount must be a positive number");
         }
-        if (!payload.containsKey("currency") || !(payload.get("currency") instanceof String)) {
-            throw new IllegalArgumentException("currency is missing or it is not text type");
+        if (basePaymentAPI.getCurrency() == null) {
+            throw new IllegalArgumentException("currency is missing");
         }
-        if (!payload.containsKey("debtor_iban") || !(payload.get("debtor_iban") instanceof String)) {
-            throw new IllegalArgumentException("debtor_iban is missing or it is not text type");
+        if (basePaymentAPI.getDebtor_iban() == null || basePaymentAPI.getDebtor_iban().isBlank()) {
+            throw new IllegalArgumentException("debtor_iban is missing or blank");
         }
-        if (!payload.containsKey("creditor_iban") || !(payload.get("creditor_iban") instanceof String)) {
-            throw new IllegalArgumentException("creditor_iban is missing or it is not text type");
+        if (basePaymentAPI.getCreditor_iban() == null || basePaymentAPI.getCreditor_iban().isBlank()) {
+            throw new IllegalArgumentException("creditor_iban is missing or blank");
+        }
+        if (basePaymentAPI.getType() == null) {
+            throw new IllegalArgumentException("payment type is missing");
         }
     }
 }

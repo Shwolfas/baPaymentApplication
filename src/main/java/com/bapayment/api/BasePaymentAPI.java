@@ -1,32 +1,14 @@
-package com.bapayment.entities;
+package com.bapayment.api;
 
 import com.bapayment.enums.CurrencyEnum;
 import com.bapayment.enums.PaymentTypesEnum;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name="db_payment")
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class BasePaymentEntity
-{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    @Enumerated(EnumType.STRING)
+public abstract class BasePaymentAPI {
     private PaymentTypesEnum type;
     private double amount;
-    @Enumerated(EnumType.STRING)
     private CurrencyEnum currency;
     private String debtor_iban;
     private String creditor_iban;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public PaymentTypesEnum getType() {
         return type;
@@ -67,5 +49,4 @@ public abstract class BasePaymentEntity
     public void setCreditor_iban(String creditor_iban) {
         this.creditor_iban = creditor_iban;
     }
-
 }

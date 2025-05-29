@@ -1,7 +1,7 @@
 package com.bapayment.service.implementation;
 
 import com.bapayment.entities.BasePaymentEntity;
-import com.bapayment.repositories.PaymentRepository;
+import com.bapayment.repositories.BasePaymentRepository;
 import com.bapayment.service.PaymentService;
 import org.springframework.stereotype.Service;
 
@@ -10,18 +10,18 @@ import java.util.List;
 @Service
 public class PaymentServiceImpl implements PaymentService {
 
-    private final PaymentRepository paymentRepository;
+    private final BasePaymentRepository basePaymentRepository;
 
-    public PaymentServiceImpl(PaymentRepository paymentRepository) {
-        this.paymentRepository = paymentRepository;
+    public PaymentServiceImpl(BasePaymentRepository basePaymentRepository) {
+        this.basePaymentRepository = basePaymentRepository;
     }
 
     @Override
     public void save(BasePaymentEntity payment) {
-        paymentRepository.save(payment);
+        basePaymentRepository.save(payment);
     }
 
     public List<BasePaymentEntity> getAll() {
-        return paymentRepository.findAll();
+        return basePaymentRepository.findAll();
     }
 }

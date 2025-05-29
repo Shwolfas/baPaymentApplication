@@ -2,11 +2,8 @@ package com.bapayment.repositories;
 
 import com.bapayment.entities.BasePaymentEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Repository
-public interface PaymentRepository extends JpaRepository<BasePaymentEntity, Long> {
+public interface BasePaymentRepository extends JpaRepository<BasePaymentEntity, Long> {
 }
