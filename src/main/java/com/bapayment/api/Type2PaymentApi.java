@@ -1,9 +1,6 @@
 package com.bapayment.api;
 
-import com.bapayment.enums.CurrencyEnum;
-import com.bapayment.enums.PaymentTypesEnum;
-
-public class Type2PaymentAPI extends BasePaymentAPI {
+public class Type2PaymentApi extends BasePaymentApi {
     private String details;
 
     public String getDetails() {

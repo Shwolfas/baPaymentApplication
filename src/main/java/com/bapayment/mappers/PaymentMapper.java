@@ -1,6 +1,6 @@
 package com.bapayment.mappers;
 
-import com.bapayment.api.BasePaymentAPI;
+import com.bapayment.api.BasePaymentApi;
 import com.bapayment.entities.BasePaymentEntity;
 import org.springframework.stereotype.Component;
 
@@ -9,10 +9,10 @@ import java.util.Map;
 public interface PaymentMapper {
     String getType();
 
-    BasePaymentEntity apiToEntity(BasePaymentAPI basePaymentAPI);
+    BasePaymentEntity apiToEntity(BasePaymentApi basePaymentAPI);
 
-    BasePaymentAPI entityToApi (BasePaymentEntity basePaymentEntity);
+    BasePaymentApi entityToApi (BasePaymentEntity basePaymentEntity);
 
-    BasePaymentAPI inputToAPI (Map<String, Object> payload);
+    BasePaymentApi inputToApi (Map<String, Object> payload);
 
 }

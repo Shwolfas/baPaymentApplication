@@ -1,7 +1,7 @@
 package com.bapayment.mappers.implementation;
 
-import com.bapayment.api.BasePaymentAPI;
-import com.bapayment.api.Type1PaymentAPI;
+import com.bapayment.api.BasePaymentApi;
+import com.bapayment.api.Type1PaymentApi;
 import com.bapayment.entities.BasePaymentEntity;
 import com.bapayment.entities.Type1PaymentEntity;
 import com.bapayment.enums.PaymentTypesEnum;
@@ -23,17 +23,17 @@ public class Type1PaymentMapperImpl implements PaymentMapper {
         return PaymentTypesEnum.TYPE1.toString();
     }
 
-    public BasePaymentAPI inputToAPI (Map<String, Object> payload) {
-        Type1PaymentAPI type1PaymentAPI = new Type1PaymentAPI();
-        basePaymentMapper.setAPIBaseFields(type1PaymentAPI, payload);
+    public BasePaymentApi inputToApi (Map<String, Object> payload) {
+        Type1PaymentApi type1PaymentAPI = new Type1PaymentApi();
+        basePaymentMapper.setApiBaseFields(type1PaymentAPI, payload);
         type1PaymentAPI.setDetails((String) payload.get("details"));
         return type1PaymentAPI;
     }
 
     @Override
-    public BasePaymentEntity apiToEntity(BasePaymentAPI basePaymentAPI) {
+    public BasePaymentEntity apiToEntity(BasePaymentApi basePaymentAPI) {
         Type1PaymentEntity type1PaymentEntity = new Type1PaymentEntity();
-        Type1PaymentAPI type1PaymentAPI = (Type1PaymentAPI) basePaymentAPI;
+        Type1PaymentApi type1PaymentAPI = (Type1PaymentApi) basePaymentAPI;
 
         basePaymentMapper.apiToEntityBaseFields(type1PaymentEntity, basePaymentAPI);
         type1PaymentEntity.setDetails(type1PaymentAPI.getDetails());
@@ -41,8 +41,8 @@ public class Type1PaymentMapperImpl implements PaymentMapper {
     }
 
     @Override
-    public BasePaymentAPI entityToApi(BasePaymentEntity basePaymentEntity) {
-        Type1PaymentAPI type1PaymentAPI = new Type1PaymentAPI();
+    public BasePaymentApi entityToApi(BasePaymentEntity basePaymentEntity) {
+        Type1PaymentApi type1PaymentAPI = new Type1PaymentApi();
         Type1PaymentEntity type1PaymentEntity = (Type1PaymentEntity) basePaymentEntity;
 
         basePaymentMapper.entityToApiBaseFields(type1PaymentAPI, basePaymentEntity);

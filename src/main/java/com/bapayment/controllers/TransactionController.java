@@ -1,23 +1,18 @@
 package com.bapayment.controllers;
 
-import com.bapayment.api.BasePaymentAPI;
+import com.bapayment.api.BasePaymentApi;
 import com.bapayment.entities.BasePaymentEntity;
 import com.bapayment.mappers.PaymentMapper;
 import com.bapayment.service.implementation.PaymentServiceImpl;
 import com.bapayment.validations.PaymentValidation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/payment")
 public class TransactionController {
 
     private final PaymentServiceImpl paymentService;
@@ -25,8 +20,6 @@ public class TransactionController {
     private final Map<String, PaymentMapper> paymentMappers;
 
     private final Map<String, PaymentValidation> paymentValidations;
-
-    List<BasePaymentEntity> list;
 
     public TransactionController(PaymentServiceImpl paymentService,
                                  Map<String, PaymentMapper> paymentMappers,
@@ -37,11 +30,28 @@ public class TransactionController {
         this.paymentValidations = paymentValdiations;
     }
 
-    @PostMapping("/savePayment")
+    @GetMapping("/getPayments")
+    public ResponseEntity<?> getAll() {
+        List<BasePaymentApi> basePaymentApiList;
+        try {
+            List<BasePaymentEntity> basePaymentEntityList = paymentService.getAll();
+            basePaymentApiList = basePaymentEntityList.stream().map(b -> {
+
+                PaymentMapper mapper = paymentMappers.get(b.getType()+"Mapper");
+                return mapper.entityToApi(b);
+
+            }).toList();
+            return ResponseEntity.ok(basePaymentApiList);
+        }  catch (Exception e) {
+            return ResponseEntity.internalServerError().body("Unexpected error: " + e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/newPayment")
     public ResponseEntity<String> save(@RequestBody Map<String, Object> payload) {
         BasePaymentEntity payment;
-
-        BasePaymentAPI paymentAPI;
+        BasePaymentApi paymentAPI;
 
         try {
             String type = (String) payload.get("type");
@@ -53,7 +63,7 @@ public class TransactionController {
                 return ResponseEntity.badRequest().body("Mapping failed");
             }
 
-            paymentAPI = mapper.inputToAPI(payload);
+            paymentAPI = mapper.inputToApi(payload);
 
             PaymentValidation validator = paymentValidations.get(type+"Validator");
             if (validator == null) {
@@ -64,12 +74,21 @@ public class TransactionController {
             payment = mapper.apiToEntity(paymentAPI);
 
             paymentService.save(payment);
-            list = paymentService.getAll();
-            return ResponseEntity.ok("Payment saved successfully");
+            return ResponseEntity.ok().body("Payment created successfully");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Validation error: " + e.getMessage());
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body("Unexpected error: " + e.getMessage());
         }
+    }
+
+    @PatchMapping("/cancelPayment/{id}")
+    public ResponseEntity<String> cancel(@PathVariable Long id) {
+        try {
+            return paymentService.cancelPayment(id);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Unexpected error: " + e.getMessage());
+        }
+
     }
 }

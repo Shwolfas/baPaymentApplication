@@ -1,9 +1,6 @@
 package com.bapayment.api;
 
-import com.bapayment.enums.CurrencyEnum;
-import com.bapayment.enums.PaymentTypesEnum;
-
-public class Type3PaymentAPI extends BasePaymentAPI{
+public class Type3PaymentApi extends BasePaymentApi {
     private String creditor_bic;
 
     public String getCreditor_bic() {

@@ -1,18 +1,11 @@
 package com.bapayment.validations.implementation;
 
-import com.bapayment.api.BasePaymentAPI;
-import com.bapayment.api.Type1PaymentAPI;
-import com.bapayment.api.Type2PaymentAPI;
-import com.bapayment.entities.BasePaymentEntity;
+import com.bapayment.api.BasePaymentApi;
+import com.bapayment.api.Type1PaymentApi;
 import com.bapayment.enums.CurrencyEnum;
 import com.bapayment.enums.PaymentTypesEnum;
 import com.bapayment.validations.PaymentValidation;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-
-import java.util.Map;
-import java.util.Objects;
 
 @Component("TYPE1Validator")
 public class Type1PaymentValidationImpl implements PaymentValidation {
@@ -28,12 +21,12 @@ public class Type1PaymentValidationImpl implements PaymentValidation {
     }
 
     @Override
-    public void validate(BasePaymentAPI basePaymentAPI) {
-        if (!(basePaymentAPI instanceof Type1PaymentAPI)) {
+    public void validate(BasePaymentApi basePaymentAPI) {
+        if (!(basePaymentAPI instanceof Type1PaymentApi)) {
             throw new IllegalArgumentException("Expected Type2PaymentAPI");
         }
 
-        Type1PaymentAPI type1PaymentAPI = (Type1PaymentAPI) basePaymentAPI;
+        Type1PaymentApi type1PaymentAPI = (Type1PaymentApi) basePaymentAPI;
 
         baseValidator.validateBase(type1PaymentAPI);
 

@@ -1,14 +1,16 @@
 package com.bapayment.validations.implementation;
 
-import com.bapayment.api.BasePaymentAPI;
+import com.bapayment.api.BasePaymentApi;
+import com.bapayment.entities.BasePaymentEntity;
+import org.hibernate.type.descriptor.DateTimeUtils;
 import org.springframework.stereotype.Component;
 
-import java.util.Map;
+import java.time.LocalDate;
 
 @Component
 public class BasePaymentValidationImpl {
 
-    protected void validateBase(BasePaymentAPI basePaymentAPI) {
+    protected void validateBase(BasePaymentApi basePaymentAPI) {
         if (basePaymentAPI.getAmount() < 0) {
             throw new IllegalArgumentException("amount must be a positive number");
         }
@@ -23,6 +25,15 @@ public class BasePaymentValidationImpl {
         }
         if (basePaymentAPI.getType() == null) {
             throw new IllegalArgumentException("payment type is missing");
+        }
+    }
+
+    public void validateBaseCancelation(BasePaymentEntity basePaymentEntity) {
+        if (basePaymentEntity.isCanceled()) {
+            throw new IllegalStateException("Payment #" + basePaymentEntity.getId() + " is already cancelled");
+        }
+        if (!basePaymentEntity.getInsert_date().toLocalDate().equals(LocalDate.now())){
+            throw new IllegalStateException("Unable to cancel #" + basePaymentEntity.getId() + ". Only same day payments can be canceled");
         }
     }
 }

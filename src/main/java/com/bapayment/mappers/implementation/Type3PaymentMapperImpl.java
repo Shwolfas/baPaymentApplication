@@ -1,7 +1,7 @@
 package com.bapayment.mappers.implementation;
 
-import com.bapayment.api.BasePaymentAPI;
-import com.bapayment.api.Type3PaymentAPI;
+import com.bapayment.api.BasePaymentApi;
+import com.bapayment.api.Type3PaymentApi;
 import com.bapayment.entities.BasePaymentEntity;
 import com.bapayment.entities.Type3PaymentEntity;
 import com.bapayment.enums.PaymentTypesEnum;
@@ -24,17 +24,17 @@ public class Type3PaymentMapperImpl implements PaymentMapper {
         return PaymentTypesEnum.TYPE3.toString();
     }
 
-    public BasePaymentAPI inputToAPI (Map<String, Object> payload) {
-        Type3PaymentAPI type3PaymentAPI = new Type3PaymentAPI();
-        basePaymentMapper.setAPIBaseFields(type3PaymentAPI, payload);
+    public BasePaymentApi inputToApi (Map<String, Object> payload) {
+        Type3PaymentApi type3PaymentAPI = new Type3PaymentApi();
+        basePaymentMapper.setApiBaseFields(type3PaymentAPI, payload);
         type3PaymentAPI.setCreditor_bic((String) payload.get("creditor_bic"));
         return type3PaymentAPI;
     }
 
     @Override
-    public BasePaymentEntity apiToEntity(BasePaymentAPI basePaymentAPI) {
+    public BasePaymentEntity apiToEntity(BasePaymentApi basePaymentAPI) {
         Type3PaymentEntity type3PaymentEntity = new Type3PaymentEntity();
-        Type3PaymentAPI type3PaymentAPI = (Type3PaymentAPI) basePaymentAPI;
+        Type3PaymentApi type3PaymentAPI = (Type3PaymentApi) basePaymentAPI;
 
         basePaymentMapper.apiToEntityBaseFields(type3PaymentEntity, basePaymentAPI);
         type3PaymentEntity.setCreditor_bic(type3PaymentAPI.getCreditor_bic());
@@ -42,8 +42,8 @@ public class Type3PaymentMapperImpl implements PaymentMapper {
     }
 
     @Override
-    public BasePaymentAPI entityToApi(BasePaymentEntity basePaymentEntity) {
-        Type3PaymentAPI type3PaymentAPI = new Type3PaymentAPI();
+    public BasePaymentApi entityToApi(BasePaymentEntity basePaymentEntity) {
+        Type3PaymentApi type3PaymentAPI = new Type3PaymentApi();
         Type3PaymentEntity type3PaymentEntity = (Type3PaymentEntity) basePaymentEntity;
 
         basePaymentMapper.entityToApiBaseFields(type3PaymentAPI, basePaymentEntity);
