@@ -31,6 +31,7 @@ public class TransactionController {
         this.paymentValidations = paymentValdiations;
     }
 
+    //For testing, no need to include in the final code.
     @GetMapping("/getPayments")
     public ResponseEntity<?> getAll() {
         List<BasePaymentApi> basePaymentApiList;
