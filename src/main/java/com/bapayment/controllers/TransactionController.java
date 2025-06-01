@@ -5,6 +5,7 @@ import com.bapayment.entities.BasePaymentEntity;
 import com.bapayment.mappers.PaymentMapper;
 import com.bapayment.service.implementation.PaymentServiceImpl;
 import com.bapayment.validations.PaymentValidation;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -74,7 +75,7 @@ public class TransactionController {
             payment = mapper.apiToEntity(paymentAPI);
 
             paymentService.save(payment);
-            return ResponseEntity.ok().body("Payment created successfully");
+            return ResponseEntity.ok().body(type + " payment created successfully");
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body("Validation error: " + e.getMessage());
         } catch (Exception e) {
@@ -87,7 +88,7 @@ public class TransactionController {
         try {
             return paymentService.cancelPayment(id);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Unexpected error: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Unexpected error: " + e.getMessage());
         }
 
     }

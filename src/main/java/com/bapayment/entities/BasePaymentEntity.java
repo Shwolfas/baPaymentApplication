@@ -21,9 +21,6 @@ public abstract class BasePaymentEntity
     @Column(name="insert_date", updatable=true)
     private LocalDateTime insert_date;
 
-    @Column(name="update_date", updatable=false)
-    private LocalDateTime update_date;
-
     @Enumerated(EnumType.STRING)
     private PaymentTypesEnum type;
     private double amount;
@@ -35,7 +32,7 @@ public abstract class BasePaymentEntity
     private boolean canceled;
 
     //Always saved as EUR
-    private double cancelation_fee;
+    private Double cancelation_fee;
 
     public Long getId() {
         return id;
@@ -48,15 +45,6 @@ public abstract class BasePaymentEntity
 
     public LocalDateTime getInsert_date() {
         return insert_date;
-    }
-
-    @PostUpdate
-    protected void onUpdate() {
-        this.update_date = LocalDateTime.now();
-    }
-
-    public LocalDateTime getUpdate_date() {
-        return update_date;
     }
 
     public PaymentTypesEnum getType() {
@@ -107,11 +95,11 @@ public abstract class BasePaymentEntity
         this.canceled = canceled;
     }
 
-    public double getCancelation_fee() {
+    public Double getCancelation_fee() {
         return cancelation_fee;
     }
 
-    public void setCancelation_fee(double cancelation_fee) {
+    public void setCancelation_fee(Double cancelation_fee) {
         this.cancelation_fee = cancelation_fee;
     }
 }

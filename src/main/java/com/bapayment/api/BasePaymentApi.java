@@ -13,7 +13,7 @@ public abstract class BasePaymentApi {
     private String creditor_iban;
     private boolean canceled;
 
-    private Long cancelation_fee;
+    private Double cancelation_fee;
 
     public Long getId() {
         return id;
@@ -71,11 +71,11 @@ public abstract class BasePaymentApi {
         this.canceled = canceled;
     }
 
-    public Long getCancelation_fee() {
+    public Double getCancelation_fee() {
         return cancelation_fee;
     }
 
-    public void setCancelation_fee(Long cancelation_fee) {
+    public void setCancelation_fee(Double cancelation_fee) {
         this.cancelation_fee = cancelation_fee;
     }
 }

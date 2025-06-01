@@ -22,7 +22,7 @@ public class BasePaymentMapperImpl {
         paymentEntity.setAmount(paymentApi.getAmount());
         paymentEntity.setCurrency(paymentApi.getCurrency());
         paymentEntity.setCreditor_iban(paymentApi.getCreditor_iban());
-        paymentEntity.setDebtor_iban(paymentApi.getDebtor_iban());;
+        paymentEntity.setDebtor_iban(paymentApi.getDebtor_iban());
     }
 
     protected void entityToApiBaseFields(BasePaymentApi paymentApi, BasePaymentEntity paymentEntity){
@@ -32,6 +32,8 @@ public class BasePaymentMapperImpl {
         paymentApi.setCurrency(paymentEntity.getCurrency());
         paymentApi.setCreditor_iban(paymentEntity.getCreditor_iban());
         paymentApi.setDebtor_iban(paymentEntity.getDebtor_iban());;
+        paymentApi.setCanceled(paymentEntity.isCanceled());
+        paymentApi.setCancelation_fee(paymentEntity.getCancelation_fee());
     }
 
 

@@ -2,6 +2,8 @@ package com.bapayment.validations.implementation;
 
 import com.bapayment.api.BasePaymentApi;
 import com.bapayment.entities.BasePaymentEntity;
+import com.bapayment.exceptions.NotSameDayCancelationException;
+import com.bapayment.exceptions.PaymentAlreadyCanceledException;
 import org.hibernate.type.descriptor.DateTimeUtils;
 import org.springframework.stereotype.Component;
 
@@ -28,12 +30,12 @@ public class BasePaymentValidationImpl {
         }
     }
 
-    public void validateBaseCancelation(BasePaymentEntity basePaymentEntity) {
+    public void validateBaseCancelation(BasePaymentEntity basePaymentEntity) throws Exception{
         if (basePaymentEntity.isCanceled()) {
-            throw new IllegalStateException("Payment #" + basePaymentEntity.getId() + " is already cancelled");
+            throw new PaymentAlreadyCanceledException("Payment #" + basePaymentEntity.getId() + " is already cancelled");
         }
         if (!basePaymentEntity.getInsert_date().toLocalDate().equals(LocalDate.now())){
-            throw new IllegalStateException("Unable to cancel #" + basePaymentEntity.getId() + ". Only same day payments can be canceled");
+            throw new NotSameDayCancelationException("Unable to cancel #" + basePaymentEntity.getId() + ". Only same day payments can be canceled");
         }
     }
 }
