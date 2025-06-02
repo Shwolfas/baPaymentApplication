@@ -4,7 +4,6 @@ import com.bapayment.api.BasePaymentApi;
 import com.bapayment.entities.BasePaymentEntity;
 import com.bapayment.exceptions.NotSameDayCancelationException;
 import com.bapayment.exceptions.PaymentAlreadyCanceledException;
-import org.hibernate.type.descriptor.DateTimeUtils;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;

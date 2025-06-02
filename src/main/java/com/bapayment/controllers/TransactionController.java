@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -29,25 +28,6 @@ public class TransactionController {
         this.paymentService = paymentService;
         this.paymentMappers = paymentMappers;
         this.paymentValidations = paymentValdiations;
-    }
-
-    //For testing, no need to include in the final code.
-    @GetMapping("/getPayments")
-    public ResponseEntity<?> getAll() {
-        List<BasePaymentApi> basePaymentApiList;
-        try {
-            List<BasePaymentEntity> basePaymentEntityList = paymentService.getAll();
-            basePaymentApiList = basePaymentEntityList.stream().map(b -> {
-
-                PaymentMapper mapper = paymentMappers.get(b.getType()+"Mapper");
-                return mapper.entityToApi(b);
-
-            }).toList();
-            return ResponseEntity.ok(basePaymentApiList);
-        }  catch (Exception e) {
-            return ResponseEntity.internalServerError().body("Unexpected error: " + e.getMessage());
-        }
-
     }
 
     @PostMapping("/newPayment")

@@ -1,29 +1,20 @@
 package com.bapayment.service.implementation;
 
-import com.bapayment.api.BasePaymentApi;
 import com.bapayment.api.query.CancelFeeView;
 import com.bapayment.entities.BasePaymentEntity;
-import com.bapayment.enums.PaymentTypesEnum;
 import com.bapayment.exceptions.NotSameDayCancelationException;
 import com.bapayment.exceptions.PaymentAlreadyCanceledException;
 import com.bapayment.repositories.BasePaymentRepository;
 import com.bapayment.service.PaymentService;
 import com.bapayment.validations.implementation.BasePaymentValidationImpl;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.type.descriptor.DateTimeUtils;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
 import java.time.Duration;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.Temporal;
-import java.time.temporal.TemporalAmount;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 @Service

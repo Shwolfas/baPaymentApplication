@@ -1,7 +1,6 @@
 package com.bapayment.controllers;
 
 import com.bapayment.api.query.CancelFeeView;
-import com.bapayment.repositories.BasePaymentRepository;
 import com.bapayment.service.implementation.PaymentServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,14 +9,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/payment")
 public class QueryController {
-
-
-
     private final PaymentServiceImpl paymentService;
 
     public QueryController(PaymentServiceImpl paymentService) {

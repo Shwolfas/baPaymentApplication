@@ -3,10 +3,8 @@ package com.bapayment.entities;
 import com.bapayment.enums.CurrencyEnum;
 import com.bapayment.enums.PaymentTypesEnum;
 import jakarta.persistence.*;
-import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name="db_payment")

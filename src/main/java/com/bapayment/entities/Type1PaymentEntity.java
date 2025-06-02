@@ -1,16 +1,13 @@
 package com.bapayment.entities;
 
-import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
+import jakarta.persistence.Entity;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "db_payment_type1")
 @PrimaryKeyJoinColumn(name = "payment_id")
 public class Type1PaymentEntity extends BasePaymentEntity {
-
-    @Column(name="update_date", updatable=false)
-    private LocalDateTime update_date;
     private String details;
 
 
