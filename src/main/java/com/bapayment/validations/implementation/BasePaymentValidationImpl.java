@@ -4,14 +4,16 @@ import com.bapayment.api.BasePaymentApi;
 import com.bapayment.entities.BasePaymentEntity;
 import com.bapayment.exceptions.NotSameDayCancelationException;
 import com.bapayment.exceptions.PaymentAlreadyCanceledException;
+import com.bapayment.validations.BasePaymentValidation;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
 
 @Component
-public class BasePaymentValidationImpl {
+public class BasePaymentValidationImpl implements BasePaymentValidation {
 
-    protected void validateBase(BasePaymentApi basePaymentAPI) {
+    @Override
+    public void validateBase(BasePaymentApi basePaymentAPI) {
         if (basePaymentAPI.getAmount() < 0) {
             throw new IllegalArgumentException("amount must be a positive number");
         }
@@ -29,6 +31,7 @@ public class BasePaymentValidationImpl {
         }
     }
 
+    @Override
     public void validateBaseCancelation(BasePaymentEntity basePaymentEntity) throws Exception{
         if (basePaymentEntity.isCanceled()) {
             throw new PaymentAlreadyCanceledException("Payment #" + basePaymentEntity.getId() + " is already cancelled");

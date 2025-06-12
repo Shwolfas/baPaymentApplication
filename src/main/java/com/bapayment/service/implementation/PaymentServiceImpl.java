@@ -6,7 +6,7 @@ import com.bapayment.exceptions.NotSameDayCancelationException;
 import com.bapayment.exceptions.PaymentAlreadyCanceledException;
 import com.bapayment.repositories.BasePaymentRepository;
 import com.bapayment.service.PaymentService;
-import com.bapayment.validations.implementation.BasePaymentValidationImpl;
+import com.bapayment.validations.BasePaymentValidation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,11 +22,11 @@ public class PaymentServiceImpl implements PaymentService {
 
     private final BasePaymentRepository basePaymentRepository;
 
-    private final BasePaymentValidationImpl basePaymentValidation;
+    private final BasePaymentValidation basePaymentValidation;
 
 
     public PaymentServiceImpl(BasePaymentRepository basePaymentRepository,
-                              BasePaymentValidationImpl basePaymentValidation) {
+                              BasePaymentValidation basePaymentValidation) {
         this.basePaymentRepository = basePaymentRepository;
         this.basePaymentValidation = basePaymentValidation;
     }

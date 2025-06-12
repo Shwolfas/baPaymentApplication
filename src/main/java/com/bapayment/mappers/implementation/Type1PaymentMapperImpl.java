@@ -12,9 +12,9 @@ import java.util.Map;
 @Component("TYPE1Mapper")
 public class Type1PaymentMapperImpl implements PaymentMapper {
 
-    private final BasePaymentMapperImpl basePaymentMapper;
+    private final BasePaymentMapper basePaymentMapper;
 
-    public Type1PaymentMapperImpl(BasePaymentMapperImpl basePaymentMapper) {
+    public Type1PaymentMapperImpl(BasePaymentMapper basePaymentMapper) {
         this.basePaymentMapper = basePaymentMapper;
     }
 
@@ -49,6 +49,4 @@ public class Type1PaymentMapperImpl implements PaymentMapper {
         type1PaymentAPI.setDetails(type1PaymentEntity.getDetails());
         return type1PaymentAPI;
     }
-
-
 }

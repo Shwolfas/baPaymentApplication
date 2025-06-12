@@ -13,9 +13,9 @@ import java.util.Map;
 @Component("TYPE2Mapper")
 public class Type2PaymentMapperImpl implements PaymentMapper {
 
-    private final BasePaymentMapperImpl basePaymentMapper;
+    private final BasePaymentMapper basePaymentMapper;
 
-    public Type2PaymentMapperImpl(BasePaymentMapperImpl basePaymentMapper) {
+    public Type2PaymentMapperImpl(BasePaymentMapper basePaymentMapper) {
         this.basePaymentMapper = basePaymentMapper;
     }
 

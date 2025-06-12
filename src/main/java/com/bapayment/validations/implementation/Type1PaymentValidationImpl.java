@@ -4,15 +4,16 @@ import com.bapayment.api.BasePaymentApi;
 import com.bapayment.api.Type1PaymentApi;
 import com.bapayment.enums.CurrencyEnum;
 import com.bapayment.enums.PaymentTypesEnum;
+import com.bapayment.validations.BasePaymentValidation;
 import com.bapayment.validations.PaymentValidation;
 import org.springframework.stereotype.Component;
 
 @Component("TYPE1Validator")
 public class Type1PaymentValidationImpl implements PaymentValidation {
 
-    private final BasePaymentValidationImpl baseValidator;
+    private final BasePaymentValidation baseValidator;
 
-    public Type1PaymentValidationImpl(BasePaymentValidationImpl baseValidator) {
+    public Type1PaymentValidationImpl(BasePaymentValidation baseValidator) {
         this.baseValidator = baseValidator;
     }
 
